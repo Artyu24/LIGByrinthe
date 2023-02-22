@@ -8,42 +8,50 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float offset = 5f;
+    
     private DirectionState[] allDir = new DirectionState[4] {DirectionState.NORTH, DirectionState.EAST, DirectionState.SOUTH, DirectionState.WEST};
     private int idDir = 0;
+    private bool isInMovement = false;
 
     private CinemachineVirtualCamera brain;
     private CinemachineTransposer body;
-
-    private Transform obstruction;
 
     private void Awake()
     {
         brain = GetComponent<CinemachineVirtualCamera>();
         body = brain.GetCinemachineComponent<CinemachineTransposer>();
+
+        body.m_FollowOffset = new Vector3(0, 0, -offset);
+        transform.position =  new Vector3(player.position.x, player.position.y, transform.position.z - offset);
+        
         brain.Follow = player;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !isInMovement)
         {
             //Debug.Log("Left");
+            isInMovement = true;
             brain.Follow = null;
             transform.DOMove(GetNextPosition(1), 2).OnComplete(() =>
             {
-                ViewObstructed();
+                WallManager.instance.DesacWall(allDir[idDir], player.position);
                 brain.Follow = player;
+                isInMovement = false;
             });
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && !isInMovement)
         {
             //Debug.Log("Droite");
+            isInMovement = true;
             brain.Follow = null;
             transform.DOMove(GetNextPosition(-1), 2).OnComplete(() =>
             {
-                ViewObstructed();
+                WallManager.instance.DesacWall(allDir[idDir], player.position);
                 brain.Follow = player;
+                isInMovement = false;
             });
         }
     }
@@ -82,26 +90,5 @@ public class CameraMovement : MonoBehaviour
         }
 
         return Vector3.zero;
-    }
-
-    private void ViewObstructed()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, player.position - transform.position, out hit, offset + 4))
-        {
-            if (hit.collider.gameObject.tag != "Player")
-            {
-                obstruction = hit.transform;
-                obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-            }
-            else
-            {
-                if (obstruction != null)
-                {
-                    obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-                }
-            }
-        }
     }
 }
