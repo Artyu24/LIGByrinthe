@@ -7,8 +7,12 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private Transform compass;
+    [SerializeField] private float animationTime = 1f;
     [SerializeField] private float offset = 5f;
-    
+
+    private List<RectTransform> compassLetterList = new List<RectTransform>();
+
     private DirectionState[] allDir = new DirectionState[4] {DirectionState.NORTH, DirectionState.EAST, DirectionState.SOUTH, DirectionState.WEST};
     private int idDir = 0;
     private bool isInMovement = false;
@@ -25,6 +29,11 @@ public class CameraMovement : MonoBehaviour
         transform.position =  new Vector3(player.position.x, player.position.y, transform.position.z - offset);
         
         brain.Follow = player;
+
+        foreach (Transform child in compass)
+        {
+            compassLetterList.Add(child.GetComponent<RectTransform>());
+        }
     }
 
     void Update()
@@ -34,7 +43,7 @@ public class CameraMovement : MonoBehaviour
             //Debug.Log("Left");
             isInMovement = true;
             brain.Follow = null;
-            transform.DOMove(GetNextPosition(1), 2).OnComplete(() =>
+            transform.DOMove(GetNextPosition(1), animationTime).OnComplete(() =>
             {
                 WallManager.instance.DesacWall(allDir[idDir], player.position);
                 brain.Follow = player;
@@ -47,7 +56,7 @@ public class CameraMovement : MonoBehaviour
             //Debug.Log("Droite");
             isInMovement = true;
             brain.Follow = null;
-            transform.DOMove(GetNextPosition(-1), 2).OnComplete(() =>
+            transform.DOMove(GetNextPosition(-1), animationTime).OnComplete(() =>
             {
                 WallManager.instance.DesacWall(allDir[idDir], player.position);
                 brain.Follow = player;
@@ -64,6 +73,11 @@ public class CameraMovement : MonoBehaviour
             idDir = 0;
         else
             idDir += modifier;
+
+        foreach (RectTransform letterRect in compassLetterList)
+        {
+            letterRect.DORotate(new Vector3(0, 0, letterRect.eulerAngles.z + 90 * modifier), animationTime);
+        }
 
         return allDir[idDir];
     }
