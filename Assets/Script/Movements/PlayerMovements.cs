@@ -43,7 +43,7 @@ public class PlayerMovements : MonoBehaviour
     private void FixedUpdate()
     {
         Debug.Log("Movement Values : " + movements.ReadValue<float>());
-        rb.velocity = new UnityEngine.Vector2(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y);
+        rb.velocity = new UnityEngine.Vector2(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
 
     }
 
