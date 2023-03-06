@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
 {
     [Header("Player Camera")]
     [SerializeField] private Transform playerCameraPoint;
+    [SerializeField] private Transform mapCamera;
     [SerializeField] private float offset = 5f;
 
     [Header("Compass")]
@@ -87,6 +88,7 @@ public class CameraMovement : MonoBehaviour
         {
             letterRect.DORotate(new Vector3(0, 0, letterRect.eulerAngles.z + 90 * modifier), animationTime);
         }
+        mapCamera.DORotate(new Vector3(90, mapCamera.eulerAngles.y + 90 * modifier), animationTime);
 
         return allDir[idDir];
     }
