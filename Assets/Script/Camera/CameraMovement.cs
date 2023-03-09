@@ -6,18 +6,9 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [Header("Player Camera")]
-    [SerializeField] private Transform playerCameraPoint;
+    [SerializeField] private Transform player;
     [SerializeField] private float offset = 5f;
-
-    [Header("Compass")]
-    [SerializeField] private Transform compass;
-
-    [Header("Divers")]
-    [SerializeField] private float animationTime = 1f;
-
-    private List<RectTransform> compassLetterList = new List<RectTransform>();
-
+    
     private DirectionState[] allDir = new DirectionState[4] {DirectionState.NORTH, DirectionState.EAST, DirectionState.SOUTH, DirectionState.WEST};
     private int idDir = 0;
     private bool isInMovement = false;
@@ -31,14 +22,9 @@ public class CameraMovement : MonoBehaviour
         body = brain.GetCinemachineComponent<CinemachineTransposer>();
 
         body.m_FollowOffset = new Vector3(0, 0, -offset);
-        transform.position =  new Vector3(playerCameraPoint.position.x, playerCameraPoint.position.y, transform.position.z - offset);
+        transform.position =  new Vector3(player.position.x, player.position.y, transform.position.z - offset);
         
-        brain.Follow = playerCameraPoint;
-
-        foreach (Transform child in compass)
-        {
-            compassLetterList.Add(child.GetComponent<RectTransform>());
-        }
+        brain.Follow = player;
     }
 
     void Update()
@@ -46,14 +32,12 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && !isInMovement)
         {
             //Debug.Log("Left");
-            WallManager.instance.ResetWall();
-
             isInMovement = true;
             brain.Follow = null;
-            transform.DOMove(GetNextPosition(1), animationTime).OnComplete(() =>
+            transform.DOMove(GetNextPosition(1), 2).OnComplete(() =>
             {
-                WallManager.instance.DesacWall(allDir[idDir], playerCameraPoint.position);
-                brain.Follow = playerCameraPoint;
+                WallManager.instance.DesacWall(allDir[idDir], player.position);
+                brain.Follow = player;
                 isInMovement = false;
             });
         }
@@ -61,14 +45,12 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && !isInMovement)
         {
             //Debug.Log("Droite");
-            WallManager.instance.ResetWall();
-
             isInMovement = true;
             brain.Follow = null;
-            transform.DOMove(GetNextPosition(-1), animationTime).OnComplete(() =>
+            transform.DOMove(GetNextPosition(-1), 2).OnComplete(() =>
             {
-                WallManager.instance.DesacWall(allDir[idDir], playerCameraPoint.position);
-                brain.Follow = playerCameraPoint;
+                WallManager.instance.DesacWall(allDir[idDir], player.position);
+                brain.Follow = player;
                 isInMovement = false;
             });
         }
@@ -83,11 +65,6 @@ public class CameraMovement : MonoBehaviour
         else
             idDir += modifier;
 
-        foreach (RectTransform letterRect in compassLetterList)
-        {
-            letterRect.DORotate(new Vector3(0, 0, letterRect.eulerAngles.z + 90 * modifier), animationTime);
-        }
-
         return allDir[idDir];
     }
 
@@ -97,19 +74,19 @@ public class CameraMovement : MonoBehaviour
         {
             case DirectionState.NORTH:
                 body.m_FollowOffset = new Vector3(0, 0, -offset);
-                return new Vector3(playerCameraPoint.position.x, playerCameraPoint.position.y, transform.position.z - offset);
+                return new Vector3(player.position.x, player.position.y, transform.position.z - offset);
             
             case DirectionState.EAST:
                 body.m_FollowOffset = new Vector3(-offset, 0 , 0);
-                return new Vector3(transform.position.x - offset, playerCameraPoint.position.y, playerCameraPoint.position.z);
+                return new Vector3(transform.position.x - offset, player.position.y, player.position.z);
             
             case DirectionState.SOUTH:
                 body.m_FollowOffset = new Vector3(0, 0, offset);
-                return new Vector3(playerCameraPoint.position.x, playerCameraPoint.position.y, transform.position.z + offset);
+                return new Vector3(player.position.x, player.position.y, transform.position.z + offset);
             
             case DirectionState.WEST:
                 body.m_FollowOffset = new Vector3(offset, 0, 0);
-                return new Vector3(transform.position.x + offset, playerCameraPoint.position.y, playerCameraPoint.position.z);
+                return new Vector3(transform.position.x + offset, player.position.y, player.position.z);
         }
 
         return Vector3.zero;

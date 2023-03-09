@@ -6,8 +6,7 @@ public class WallManager : MonoBehaviour
 {
     public static WallManager instance;
 
-    [SerializeField] private List<WallObject> allWalls;
-    private List<WallObject> hiddenWalls = new List<WallObject>();
+    [SerializeField] private List<WallObject> wallObjects;
 
     private void Awake()
     {
@@ -15,27 +14,17 @@ public class WallManager : MonoBehaviour
             instance = this;
     }
 
-    public void ResetWall()
-    {
-        foreach (WallObject hiddenWall in hiddenWalls)
-        {
-            hiddenWall.gameObject.layer = 0;
-        }
-        hiddenWalls.Clear();
-    }
-
     public void DesacWall(DirectionState state, Vector3 playerPos)
     {
-        foreach (WallObject wall in allWalls)
+        foreach (WallObject wall in wallObjects)
         {
             if (wall.isWallFrontOfPlayer(state, playerPos))
             {
-                wall.gameObject.layer = 6;
-                hiddenWalls.Add(wall);
+                wall.gameObject.SetActive(false);
             }
             else
             {
-                wall.gameObject.layer = 0;
+                wall.gameObject.SetActive(true);
             }
         }
     }
