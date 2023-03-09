@@ -13,28 +13,35 @@ public class CameraMovement : MonoBehaviour
 
     [Header("Compass")]
     [SerializeField] private Transform compass;
+    private List<RectTransform> compassLetterList = new List<RectTransform>();
 
     [Header("Divers")]
     [SerializeField] private float animationTime = 1f;
-
-    private List<RectTransform> compassLetterList = new List<RectTransform>();
-
     private DirectionState[] allDir = new DirectionState[4] {DirectionState.NORTH, DirectionState.EAST, DirectionState.SOUTH, DirectionState.WEST};
     private int idDir = 0;
     private bool isInMovement = false;
 
+    [Header("Cinemachine")]
     private CinemachineVirtualCamera brain;
     private CinemachineTransposer body;
+
+    [Header("Delegate")]
+    private static SwitchLevelDelegate resetPlayerCam = null;
+    public static SwitchLevelDelegate ResetPlayerCam => resetPlayerCam;
+
+    public delegate DirectionState DirectionDelegate();
+    private static DirectionDelegate getDirection = null;
+    public static DirectionDelegate GetDirection => getDirection;
+
 
     private void Awake()
     {
         brain = GetComponent<CinemachineVirtualCamera>();
         body = brain.GetCinemachineComponent<CinemachineTransposer>();
 
-        body.m_FollowOffset = new Vector3(0, 0, -offset);
-        transform.position =  new Vector3(playerCameraPoint.position.x, playerCameraPoint.position.y, transform.position.z - offset);
-        
-        brain.Follow = playerCameraPoint;
+        SetPlayerCamNorth();
+        resetPlayerCam = SetPlayerCamNorth;
+        getDirection = GetActualDirection;
 
         foreach (Transform child in compass)
         {
@@ -44,7 +51,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !isInMovement)
+        if (Input.GetKeyDown(KeyCode.K) && !isInMovement)
         {
             //Debug.Log("Left");
             WallManager.instance.ResetWall();
@@ -59,7 +66,7 @@ public class CameraMovement : MonoBehaviour
             });
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && !isInMovement)
+        if (Input.GetKeyDown(KeyCode.M) && !isInMovement)
         {
             //Debug.Log("Droite");
             WallManager.instance.ResetWall();
@@ -73,6 +80,14 @@ public class CameraMovement : MonoBehaviour
                 isInMovement = false;
             });
         }
+    }
+
+    private void SetPlayerCamNorth()
+    {
+        body.m_FollowOffset = new Vector3(0, 0, -offset);
+        transform.position = new Vector3(playerCameraPoint.position.x, playerCameraPoint.position.y, transform.position.z - offset);
+
+        brain.Follow = playerCameraPoint;
     }
 
     private DirectionState GetNextDirection(int modifier)
@@ -115,5 +130,10 @@ public class CameraMovement : MonoBehaviour
         }
 
         return Vector3.zero;
+    }
+
+    public DirectionState GetActualDirection()
+    {
+        return allDir[idDir];
     }
 }
