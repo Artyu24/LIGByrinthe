@@ -8,15 +8,27 @@ public class CameraMovement : MonoBehaviour
 {
     [Header("Player Camera")]
     [SerializeField] private Transform playerCameraPoint;
+<<<<<<< HEAD
     [SerializeField] private Transform mapCamera;
+=======
+>>>>>>> parent of 7893da1 (Merge branch 'Maxens')
     [SerializeField] private float offset = 5f;
 
     [Header("Compass")]
     [SerializeField] private Transform compass;
+<<<<<<< HEAD
     private List<RectTransform> compassLetterList = new List<RectTransform>();
 
     [Header("Divers")]
     [SerializeField] private float animationTime = 1f;
+=======
+
+    [Header("Divers")]
+    [SerializeField] private float animationTime = 1f;
+
+    private List<RectTransform> compassLetterList = new List<RectTransform>();
+
+>>>>>>> parent of 7893da1 (Merge branch 'Maxens')
     private DirectionState[] allDir = new DirectionState[4] {DirectionState.NORTH, DirectionState.EAST, DirectionState.SOUTH, DirectionState.WEST};
     private int idDir = 0;
     private bool isInMovement = false;
@@ -39,9 +51,16 @@ public class CameraMovement : MonoBehaviour
         brain = GetComponent<CinemachineVirtualCamera>();
         body = brain.GetCinemachineComponent<CinemachineTransposer>();
 
+<<<<<<< HEAD
         SetPlayerCamNorth();
         resetPlayerCam = SetPlayerCamNorth;
         getDirection = GetActualDirection;
+=======
+        body.m_FollowOffset = new Vector3(0, 0, -offset);
+        transform.position =  new Vector3(playerCameraPoint.position.x, playerCameraPoint.position.y, transform.position.z - offset);
+        
+        brain.Follow = playerCameraPoint;
+>>>>>>> parent of 7893da1 (Merge branch 'Maxens')
 
         foreach (Transform child in compass)
         {
@@ -103,7 +122,10 @@ public class CameraMovement : MonoBehaviour
         {
             letterRect.DORotate(new Vector3(0, 0, letterRect.eulerAngles.z + 90 * modifier), animationTime);
         }
+<<<<<<< HEAD
         mapCamera.DORotate(new Vector3(90, mapCamera.eulerAngles.y + 90 * modifier), animationTime);
+=======
+>>>>>>> parent of 7893da1 (Merge branch 'Maxens')
 
         return allDir[idDir];
     }
