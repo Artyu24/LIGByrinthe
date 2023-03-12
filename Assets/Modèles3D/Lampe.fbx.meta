@@ -1,15 +1,9 @@
 fileFormatVersion: 2
-guid: b8b2f177bffd8174ea965b969f3c6067
+guid: 8667cfc80e6f06348ac840db578ce387
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
   externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Fire
-    second: {fileID: 4400912183637033359, guid: 2c3ce8bcbf8268b43b67bbf6b72c1efb,
-      type: 3}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
