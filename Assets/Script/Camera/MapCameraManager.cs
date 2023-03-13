@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class MapCameraManager : MonoBehaviour
 {
     [SerializeField] private Transform lvlCamera;
     [SerializeField] private List<Transform> cameraLvlPoint = new List<Transform>();
@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach (Transform point in lvlPointQueue)
+        foreach (Transform point in cameraLvlPoint)
         {
             lvlPointQueue.Enqueue(point);
         }
@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour
     }
 
     private void SwitchCam()
-    { 
+    {
         lvlCamera.position = lvlPointQueue.Dequeue().position;
         lvlCamera.eulerAngles = new Vector3(90, 0, 0);
     }
