@@ -44,12 +44,14 @@ public class WallObject : MonoBehaviour
             {
                 if (isUp)
                 {
-                    if (vertex.x < pos)
+                    //West
+                    if (vertex.x < pos || Mathf.Abs(vertex.x) - Mathf.Abs(pos) > 10)
                         return false;
                 }
                 else
                 {
-                    if (vertex.x > pos)
+                    //East
+                    if (vertex.x > pos || Mathf.Abs(vertex.x) - Mathf.Abs(pos) > 10)
                         return false;
                 }
             }
@@ -57,12 +59,14 @@ public class WallObject : MonoBehaviour
             {
                 if (isUp)
                 {
-                    if (vertex.z < pos)
+                    //South
+                    if (vertex.z < pos || Mathf.Abs(vertex.z) - Mathf.Abs(pos) > 10)
                         return false;
                 }
                 else
                 {
-                    if (vertex.z > pos)
+                    //North
+                    if (vertex.z > pos || Mathf.Abs(vertex.z) - Mathf.Abs(pos) > 10)
                         return false;
                 }
             }
