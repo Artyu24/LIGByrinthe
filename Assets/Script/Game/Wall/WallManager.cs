@@ -6,7 +6,7 @@ public class WallManager : MonoBehaviour
 {
     public static WallManager instance;
 
-    [SerializeField] private List<WallObject> allWalls;
+    public List<WallObject> allWalls = new List<WallObject>();
     private List<WallObject> hiddenWalls = new List<WallObject>();
 
     private void Awake()
