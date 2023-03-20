@@ -13,6 +13,18 @@ public class WallManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        //Remove all Null Object
+        for (int i = 0; i < allWalls.Count;)
+        {
+            if (!allWalls[i])
+            {
+                allWalls.Remove(allWalls[i]);
+                continue;
+            }
+
+            i++;
+        }
     }
 
     public void ResetWall()

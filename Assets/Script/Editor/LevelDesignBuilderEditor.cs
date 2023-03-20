@@ -14,6 +14,7 @@ public class LevelDesignBuilderEditor : EditorWindow
     private int posY = 0;
     private int posZ = 0;
     private bool isVertical = true;
+    private Color colorWanted = Color.black;
 
     private int idTemp = 0;
     private int posXTemp = 0;
@@ -78,6 +79,8 @@ public class LevelDesignBuilderEditor : EditorWindow
         posY = EditorGUILayout.IntField("Y:", posY, GUILayout.ExpandWidth(false));
         posZ = EditorGUILayout.IntField("Z:", posZ, GUILayout.ExpandWidth(false));
         EditorGUILayout.EndHorizontal();
+
+        colorWanted = EditorGUILayout.ColorField(colorWanted);
         
         if (isVertical)
         {
@@ -137,10 +140,25 @@ public class LevelDesignBuilderEditor : EditorWindow
         {
             foreach (GameObject wallTemp in allWallTemp)
             {
-                wallTemp.GetComponent<MeshRenderer>().material = wallMat;
+                Material matTemp = new Material(wallMat);
+                matTemp.color = colorWanted;
+                wallTemp.GetComponent<MeshRenderer>().sharedMaterial = matTemp;
                 wallManager.allWalls.Add(wallTemp.GetComponent<WallObject>());
             }
             allWallTemp.Clear();
+            nbrWall = 0;
+
+            //Remove all Null Object
+            for (int i = 0; i < wallManager.allWalls.Count;)
+            {
+                if (!wallManager.allWalls[i])
+                {
+                    wallManager.allWalls.Remove(wallManager.allWalls[i]);
+                    continue;
+                }
+
+                i++;
+            }
         }
     }
 
