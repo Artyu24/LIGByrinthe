@@ -68,6 +68,11 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        WallManager.instance.DesacWall(allDir[idDir], playerCameraPoint.position);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K) && !isInMovement)

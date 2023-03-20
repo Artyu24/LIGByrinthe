@@ -6,13 +6,25 @@ public class WallManager : MonoBehaviour
 {
     public static WallManager instance;
 
-    [SerializeField] private List<WallObject> allWalls;
+    public List<WallObject> allWalls = new List<WallObject>();
     private List<WallObject> hiddenWalls = new List<WallObject>();
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+
+        //Remove all Null Object
+        for (int i = 0; i < allWalls.Count;)
+        {
+            if (!allWalls[i])
+            {
+                allWalls.Remove(allWalls[i]);
+                continue;
+            }
+
+            i++;
+        }
     }
 
     public void ResetWall()
