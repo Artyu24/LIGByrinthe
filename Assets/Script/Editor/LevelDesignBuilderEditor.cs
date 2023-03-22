@@ -53,7 +53,7 @@ public class LevelDesignBuilderEditor : EditorWindow
             return;
         }
 
-        GameObject wallPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/Wall.prefab");
+        GameObject wallPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefab/DoNotTouch/Wall.prefab");
         if (wallPrefab == null)
         {
             EditorGUILayout.HelpBox("MISSING WALL PREFAB", MessageType.Error);
