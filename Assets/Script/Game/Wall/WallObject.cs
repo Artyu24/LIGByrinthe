@@ -7,7 +7,7 @@ public class WallObject : MonoBehaviour
     private Material mat;
     private Vector3[] vertices = new Vector3[4];
 
-    private void Start()
+    private void Awake()
     {
         mat = GetComponent<MeshRenderer>().material;
 
