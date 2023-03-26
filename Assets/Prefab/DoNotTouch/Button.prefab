@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 0}
+  buttonPlate: {fileID: 7795273330795329538}
 --- !u!135 &1395966302869705596
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -72,6 +73,7 @@ GameObject:
   - component: {fileID: 5280523114259037286}
   - component: {fileID: 7407574112925563680}
   - component: {fileID: 7349341373894941779}
+  - component: {fileID: 1870681884072005716}
   m_Layer: 0
   m_Name: Plateau plaque de pression
   m_TagString: Untagged
@@ -144,6 +146,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1870681884072005716
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047758805388173133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8125125881068223819, guid: 1e8643d32324d9c439f5fbca14132185, type: 3}
 --- !u!1 &4640330651813682849
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4640330651813682849}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0.14219792, z: 0}
+  m_LocalPosition: {x: -0, y: 0.05, z: 0}
   m_LocalScale: {x: 106.83685, y: 106.83685, z: 106.83685}
   m_ConstrainProportionsScale: 0
   m_Children: []
