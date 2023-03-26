@@ -8,11 +8,16 @@ public class MapCameraManager : MonoBehaviour
     [SerializeField] private List<Transform> cameraLvlPoint = new List<Transform>();
     private Queue<Transform> lvlPointQueue = new Queue<Transform>();
 
+    private static Camera upCamera;
+    public static Camera LvlCamera => upCamera;
+
     private static SwitchLevelDelegate nextLvlCam = null;
     public static SwitchLevelDelegate NextLvlCam => nextLvlCam;
 
     private void Awake()
     {
+        upCamera = lvlCamera.GetComponent<Camera>();
+
         foreach (Transform point in cameraLvlPoint)
         {
             lvlPointQueue.Enqueue(point);
