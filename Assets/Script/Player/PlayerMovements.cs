@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -11,7 +12,11 @@ public class PlayerMovements : MonoBehaviour
     private InputAction movements;
 
     Rigidbody rb;
+    CapsuleCollider capsuleCollider;
+    Chronometer chrono;
 
+    private bool isCrouching;
+    public float colliderHeight;
 
     [Header("Movement Parameters")]
     [SerializeField] public float speed;
@@ -22,6 +27,9 @@ public class PlayerMovements : MonoBehaviour
     {
         playerControls = new PlayerControlsAsset();
         rb = GetComponentInParent<Rigidbody>();
+        capsuleCollider = GetComponentInParent<CapsuleCollider>();
+        chrono = GetComponentInParent<Chronometer>();
+        colliderHeight = capsuleCollider.height;
     }
 
     private void OnEnable()
@@ -30,8 +38,16 @@ public class PlayerMovements : MonoBehaviour
         movements.Enable();
 
         playerControls.Player1.Jump.performed += DoJump;
+        playerControls.Player1.Jump.started += Uncrouch;
+
         playerControls.Player1.Jump.Enable();
+
+        playerControls.Player1.Crouch.started += DoCrouch;
+        playerControls.Player1.Crouch.canceled += Uncrouch;
+
+        playerControls.Player1.Crouch.Enable();
     }
+
 
 
     private void OnDisable()
@@ -72,6 +88,29 @@ public class PlayerMovements : MonoBehaviour
         {
             Debug.Log("Jumped !");
             rb.velocity = new UnityEngine.Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        }
+    }
+    private void DoCrouch(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Crouching");
+        if (!IsGrounded && !isCrouching)
+        {
+            Debug.Log("Can't crouch !");
+        }
+        else
+        {
+            isCrouching = true;
+            capsuleCollider.height = colliderHeight / 2.25f;
+        }
+    }
+
+    private void Uncrouch(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Uncrouching");
+        if (isCrouching)
+        {
+            capsuleCollider.height = colliderHeight;
+            isCrouching = false;
         }
     }
 
