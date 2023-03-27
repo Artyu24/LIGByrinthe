@@ -85,6 +85,7 @@ public class PlayerMovements : MonoBehaviour
         {
             anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x + rb.velocity.z));
             anim.SetFloat("Jump", Mathf.Abs(rb.velocity.y));
+            anim.SetFloat("Falling", rb.velocity.y);
             if (isCrouching)
                 anim.SetFloat("Crouch", 10);
             else
