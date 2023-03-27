@@ -11,9 +11,10 @@ public class SwitchLevel : MonoBehaviour
 
     private void Start()
     {
-        resetAndSwitch += CameraMovement.ResetPlayerCam;
         resetAndSwitch += MapCameraManager.NextLvlCam;
-        resetAndSwitch += GameManager.TpPlayer;
+        resetAndSwitch += GameManager.SetupNextLevel;
+
+        resetAndSwitch();
     }
 
     private void OnTriggerEnter(Collider other)
