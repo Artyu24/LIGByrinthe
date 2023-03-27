@@ -93,10 +93,20 @@ public class PlayerMovements : MonoBehaviour
 
         if (sr != null)
         {
-            if (rb.velocity.x + rb.velocity.z > 0)
-                sr.flipX = false;
-            else if (rb.velocity.x + rb.velocity.z < 0)
-                sr.flipX = true;
+            if (CameraMovement.GetDirection() == DirectionState.NORTH || CameraMovement.GetDirection() == DirectionState.WEST)
+            {
+                if (rb.velocity.x + rb.velocity.z > 0)
+                    sr.flipX = false;
+                else if (rb.velocity.x + rb.velocity.z < 0)
+                    sr.flipX = true;
+            }
+            else
+            {
+                if (rb.velocity.x + rb.velocity.z > 0)
+                    sr.flipX = true;
+                else if (rb.velocity.x + rb.velocity.z < 0)
+                    sr.flipX = false;
+            }
         }
 
         #endregion
