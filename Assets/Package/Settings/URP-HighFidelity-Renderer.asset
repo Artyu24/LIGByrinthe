@@ -16,10 +16,10 @@ MonoBehaviour:
   renderPassEvent: 300
   outlinesLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 0
   outlinesOccluderLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 2147483647
   outlineSettings:
     outlineColor: {r: 1, g: 0, b: 0, a: 1}
     outlineScale: 3.24
