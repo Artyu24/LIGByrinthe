@@ -3618,6 +3618,7 @@ GameObject:
   - component: {fileID: 1304421129}
   - component: {fileID: 1304421130}
   - component: {fileID: 1304421131}
+  - component: {fileID: 1304421132}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -3704,6 +3705,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4be4aa61e3c7c409ef1e32fd8dc241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1304421132
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304421128}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9735b60df30f2a046a3cd0915650274a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1309054513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5194,7 +5215,7 @@ GameObject:
   - component: {fileID: 1723145557}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5523,10 +5544,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7b74499040320468d6a881105824f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1304421132}
+  sr: {fileID: 1304421130}
   colliderHeight: 0
   speed: 130
   jumpForce: 10
-  IsGrounded: 0
+  IsGrounded: 1
 --- !u!54 &1740240219
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5987,7 +6010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 10, y: 0, z: 0}
+  m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 0.3
   m_YDamping: 1
   m_ZDamping: 0.3
