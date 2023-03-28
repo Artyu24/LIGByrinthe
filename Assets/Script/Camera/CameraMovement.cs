@@ -21,7 +21,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float animationTime = 1f;
     private DirectionState[] allDir = new DirectionState[4] {DirectionState.NORTH, DirectionState.EAST, DirectionState.SOUTH, DirectionState.WEST};
     private int idDir = 0;
-    private bool isInMovement = false;
+    private static bool isInMovement = false;
+    public static bool IsInMovement => isInMovement;
 
     [Header("Cinemachine")]
     private CinemachineVirtualCamera brain;
