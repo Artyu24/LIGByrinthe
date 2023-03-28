@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void SetupObjectDelegate();
 public class WallManager : MonoBehaviour
 {
     public static WallManager instance;
 
     public List<WallObject> allWalls = new List<WallObject>();
     private List<WallObject> hiddenWalls = new List<WallObject>();
+
+    public SetupObjectDelegate setupObject;
 
     private void Awake()
     {
@@ -38,6 +41,8 @@ public class WallManager : MonoBehaviour
 
     public void DesacWall(DirectionState state, Vector3 playerPos)
     {
+        setupObject();
+
         foreach (WallObject wall in allWalls)
         {
             if (wall.isWallFrontOfPlayer(state, playerPos))

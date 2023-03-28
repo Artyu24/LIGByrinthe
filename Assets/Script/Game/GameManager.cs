@@ -7,7 +7,10 @@ using UnityEngine;
 public delegate void SwitchLevelDelegate();
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     [SerializeField] private Transform player;
+    public Transform Player => player;
     [SerializeField] private List<NewLevelSetup> playerSpawnPoints = new List<NewLevelSetup>();
     private Queue<NewLevelSetup> playerPointQueue = new Queue<NewLevelSetup>();
 
@@ -19,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+
         foreach (NewLevelSetup point in playerSpawnPoints)
         {
             playerPointQueue.Enqueue(point);

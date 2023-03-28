@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class WallObject : MonoBehaviour
 {
-    private Material mat;
     private Vector3[] vertices = new Vector3[4];
 
     private void Awake()
     {
-        mat = GetComponent<MeshRenderer>().material;
-
         vertices[0] = (new Vector3(transform.position.x + transform.localScale.x / 2, 0, transform.position.z + transform.localScale.z / 2));
         vertices[1] = (new Vector3(transform.position.x - transform.localScale.x / 2, 0, transform.position.z + transform.localScale.z / 2));
         vertices[2] = (new Vector3(transform.position.x + transform.localScale.x / 2, 0, transform.position.z - transform.localScale.z / 2));
