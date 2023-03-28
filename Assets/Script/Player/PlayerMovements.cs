@@ -65,19 +65,19 @@ public class PlayerMovements : MonoBehaviour
         {
             if (CameraMovement.GetDirection() == DirectionState.NORTH)
             {
-                rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+                rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f, 0);
             }
             else if (CameraMovement.GetDirection() == DirectionState.WEST)
             {
-                rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
+                rb.velocity = new UnityEngine.Vector3(0, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
             }
             else if (CameraMovement.GetDirection() == DirectionState.SOUTH)
             {
-                rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+                rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f, 0);
             }
             else if (CameraMovement.GetDirection() == DirectionState.EAST)
             {
-                rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, -movements.ReadValue<float>() * Time.deltaTime * speed);
+                rb.velocity = new UnityEngine.Vector3(0, rb.velocity.y - 0.1f, -movements.ReadValue<float>() * Time.deltaTime * speed);
             }
             else rb.velocity = Vector3.zero;
         } 
