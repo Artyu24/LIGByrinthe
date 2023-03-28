@@ -125,7 +125,6 @@ public class PlayerMovements : MonoBehaviour
         {
             Debug.Log("Jumped !");
             rb.velocity = new UnityEngine.Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-            IsGrounded = false;
         }
     }
     private void DoCrouch(InputAction.CallbackContext obj)
