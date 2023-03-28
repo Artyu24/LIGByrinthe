@@ -60,25 +60,27 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!CameraMovement.IsInMovement)
+        if (CameraMovement.IsInMovement) rb.velocity = Vector3.zero;
+        else
         {
             if (CameraMovement.GetDirection() == DirectionState.NORTH)
             {
                 rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
             }
-            if (CameraMovement.GetDirection() == DirectionState.WEST)
+            else if (CameraMovement.GetDirection() == DirectionState.WEST)
             {
                 rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
             }
-            if (CameraMovement.GetDirection() == DirectionState.SOUTH)
+            else if (CameraMovement.GetDirection() == DirectionState.SOUTH)
             {
                 rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
             }
-            if (CameraMovement.GetDirection() == DirectionState.EAST)
+            else if (CameraMovement.GetDirection() == DirectionState.EAST)
             {
                 rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, -movements.ReadValue<float>() * Time.deltaTime * speed);
             }
-        }
+            else rb.velocity = Vector3.zero;
+        } 
         #region Anim
 
         if (anim != null)
@@ -123,6 +125,7 @@ public class PlayerMovements : MonoBehaviour
         {
             Debug.Log("Jumped !");
             rb.velocity = new UnityEngine.Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            IsGrounded = false;
         }
     }
     private void DoCrouch(InputAction.CallbackContext obj)
