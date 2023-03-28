@@ -60,24 +60,25 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.Log("Movement Values : " + movements.ReadValue<float>());
-        if(CameraMovement.GetDirection() == DirectionState.NORTH)
+        if (!CameraMovement.IsInMovement)
         {
-            rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+            if (CameraMovement.GetDirection() == DirectionState.NORTH)
+            {
+                rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+            }
+            if (CameraMovement.GetDirection() == DirectionState.WEST)
+            {
+                rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
+            }
+            if (CameraMovement.GetDirection() == DirectionState.SOUTH)
+            {
+                rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+            }
+            if (CameraMovement.GetDirection() == DirectionState.EAST)
+            {
+                rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, -movements.ReadValue<float>() * Time.deltaTime * speed);
+            }
         }
-        if(CameraMovement.GetDirection() == DirectionState.WEST)
-        {
-            rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
-        }
-        if(CameraMovement.GetDirection() == DirectionState.SOUTH)
-        {
-            rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
-        }
-        if(CameraMovement.GetDirection() == DirectionState.EAST)
-        {
-            rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, -movements.ReadValue<float>() * Time.deltaTime * speed);
-        }
-
         #region Anim
 
         if (anim != null)
