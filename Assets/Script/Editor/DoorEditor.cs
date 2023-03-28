@@ -43,7 +43,7 @@ public class DoorEditor : Editor
         ColorDrawer(Color.green, Color.white);
         if (GUILayout.Button("Instantiate Button"))
         {
-            Button prefabTemp = Instantiate(buttonPrefab).GetComponent<Button>();
+            Button prefabTemp = Instantiate(buttonPrefab, new Vector3(myObject.transform.position.x, 0, myObject.transform.position.z), Quaternion.identity).GetComponent<Button>();
             prefabTemp.door = myObject;
         }
 

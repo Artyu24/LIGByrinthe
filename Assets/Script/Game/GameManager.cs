@@ -1,29 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
 
+public delegate void SwitchLevelDelegate();
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private List<Transform> playerSpawnPoints = new List<Transform>();
-    private Queue<Transform> playerPointQueue = new Queue<Transform>();
+    [SerializeField] private List<NewLevelSetup> playerSpawnPoints = new List<NewLevelSetup>();
+    private Queue<NewLevelSetup> playerPointQueue = new Queue<NewLevelSetup>();
 
-    private static SwitchLevelDelegate tpPlayer = null;
-    public static SwitchLevelDelegate TpPlayer => tpPlayer;
+    [Header("Delegate")]
+    private static SwitchLevelDelegate resetAndSwitch = null;
+    public static SwitchLevelDelegate ResetAndSwitch => resetAndSwitch;
+    private static SwitchLevelDelegate setupNextLevel = null;
+    public static SwitchLevelDelegate SetupNextLevel => setupNextLevel;
 
     private void Awake()
     {
-        foreach (Transform point in playerSpawnPoints)
+        foreach (NewLevelSetup point in playerSpawnPoints)
         {
             playerPointQueue.Enqueue(point);
         }
 
-        tpPlayer = TeleportPlayerNextLevel;
+        setupNextLevel = SetupPlayerAndCam;
+    }
+    private void Start()
+    {
+        resetAndSwitch += MapCameraManager.NextLvlCam;
+        resetAndSwitch += SetupNextLevel;
+
+        resetAndSwitch();
     }
 
-    private void TeleportPlayerNextLevel()
+    private void SetupPlayerAndCam()
     {
-        player.position = playerPointQueue.Dequeue().position;
+        NewLevelSetup nextSetup = playerPointQueue.Dequeue();
+        player.position = nextSetup.spawnPoint.position;
+
+        CameraMovement.SetupCam(nextSetup.camDirection);
+    }
+
+
+    [Serializable]
+    struct NewLevelSetup
+    {
+        public Transform spawnPoint;
+        public DirectionState camDirection;
     }
 }

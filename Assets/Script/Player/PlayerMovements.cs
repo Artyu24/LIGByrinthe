@@ -5,12 +5,15 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMovements : MonoBehaviour
 {
     private PlayerControlsAsset playerControls;
     private InputAction movements;
 
+    [SerializeField] private Animator anim;
+    [SerializeField] private SpriteRenderer sr;
     Rigidbody rb;
     CapsuleCollider capsuleCollider;
     Chronometer chrono;
@@ -61,21 +64,53 @@ public class PlayerMovements : MonoBehaviour
         //Debug.Log("Movement Values : " + movements.ReadValue<float>());
         if(CameraMovement.GetDirection() == DirectionState.NORTH)
         {
-        rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+            rb.velocity = new UnityEngine.Vector3(movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
         }
         if(CameraMovement.GetDirection() == DirectionState.WEST)
         {
-        rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
+            rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, movements.ReadValue<float>() * Time.deltaTime * speed);
         }
         if(CameraMovement.GetDirection() == DirectionState.SOUTH)
         {
-        rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
+            rb.velocity = new UnityEngine.Vector3(-movements.ReadValue<float>() * Time.deltaTime * speed, rb.velocity.y - 0.1f);
         }
         if(CameraMovement.GetDirection() == DirectionState.EAST)
         {
             rb.velocity = new UnityEngine.Vector3(rb.velocity.x, rb.velocity.y - 0.1f, -movements.ReadValue<float>() * Time.deltaTime * speed);
         }
 
+        #region Anim
+
+        if (anim != null)
+        {
+            anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x + rb.velocity.z));
+            anim.SetFloat("Jump", Mathf.Abs(rb.velocity.y));
+            anim.SetFloat("Falling", rb.velocity.y);
+            if (isCrouching)
+                anim.SetFloat("Crouch", 10);
+            else
+                anim.SetFloat("Crouch", 0);
+        }
+
+        if (sr != null)
+        {
+            if (CameraMovement.GetDirection() == DirectionState.NORTH || CameraMovement.GetDirection() == DirectionState.WEST)
+            {
+                if (rb.velocity.x + rb.velocity.z > 0)
+                    sr.flipX = false;
+                else if (rb.velocity.x + rb.velocity.z < 0)
+                    sr.flipX = true;
+            }
+            else
+            {
+                if (rb.velocity.x + rb.velocity.z > 0)
+                    sr.flipX = true;
+                else if (rb.velocity.x + rb.velocity.z < 0)
+                    sr.flipX = false;
+            }
+        }
+
+        #endregion
     }
 
     private void DoJump(InputAction.CallbackContext obj)
@@ -101,6 +136,7 @@ public class PlayerMovements : MonoBehaviour
         {
             isCrouching = true;
             capsuleCollider.height = colliderHeight / 2.25f;
+            capsuleCollider.center = new Vector3(0, -0.45f, 0);
         }
     }
 
@@ -110,6 +146,7 @@ public class PlayerMovements : MonoBehaviour
         if (isCrouching)
         {
             capsuleCollider.height = colliderHeight;
+            capsuleCollider.center = Vector3.zero;
             isCrouching = false;
         }
     }
