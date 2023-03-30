@@ -33,8 +33,6 @@ public class MapCameraManager : MonoBehaviour
         if (Vector2.Distance(new Vector2(GameManager.instance.Player.position.x, GameManager.instance.Player.position.z), new Vector2(lvlCamera.position.x, lvlCamera.position.z)) > upCamera.orthographicSize - 7)
         {
 
-            Debug.Log("yes");
-
             if (Vector2.Distance(new Vector2(GameManager.instance.Player.position.x, 0), new Vector2(lvlCamera.position.x,0)) > upCamera.orthographicSize - 7)
             {
                 lvlCamera.position = Vector3.MoveTowards(lvlCamera.position, new Vector3(GameManager.instance.Player.position.x, lvlCamera.position.y, lvlCamera.position.z), Time.deltaTime * speed);
