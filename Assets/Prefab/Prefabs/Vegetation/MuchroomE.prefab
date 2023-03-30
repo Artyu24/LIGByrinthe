@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 427676}
   - component: {fileID: 3329504}
   - component: {fileID: 2311086}
+  - component: {fileID: -4154259193296243744}
   m_Layer: 0
   m_Name: MuchroomE
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4154259193296243744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff10c45cb107b14facabd7932199bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

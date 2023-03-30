@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4150970245314866925}
   - component: {fileID: 3661679241306911824}
   - component: {fileID: 1395966302869705596}
+  - component: {fileID: 6866862398327005993}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -62,6 +63,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.08
   m_Center: {x: 0, y: 0.43, z: 0}
+--- !u!114 &6866862398327005993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3661679241306911831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff10c45cb107b14facabd7932199bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4047758805388173133
 GameObject:
   m_ObjectHideFlags: 0
