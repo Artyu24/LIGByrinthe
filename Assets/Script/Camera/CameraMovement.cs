@@ -11,7 +11,6 @@ public class CameraMovement : MonoBehaviour
 {
     [Header("Player Camera")]
     [SerializeField] private Transform playerCameraPoint;
-    [SerializeField] private Kino.Motion motionBlurComp;
     [SerializeField] private Transform mapCamera;
     [SerializeField] private float offset = 5f;
 
@@ -44,10 +43,6 @@ public class CameraMovement : MonoBehaviour
         brain = GetComponent<CinemachineVirtualCamera>();
         body = brain.GetCinemachineComponent<CinemachineTransposer>();
 
-        motionBlurComp = Camera.main.GetComponentInParent<Kino.Motion>();
-        motionBlurComp.enabled = false;
-
-
         //Set Delegate
         setupCam = SetPlayerCam;
         getDirection = GetActualDirection;
@@ -67,14 +62,11 @@ public class CameraMovement : MonoBehaviour
 
             isInMovement = true;
             brain.Follow = null;
-            motionBlurComp.enabled = true;
             transform.DOMove(SetupNextPosition(1), animationTime).OnComplete(() =>
             {
                 WallManager.instance.DesacWall(allDir[idDir], playerCameraPoint.position);
                 brain.Follow = playerCameraPoint;
                 isInMovement = false;
-                motionBlurComp.enabled = false;
-
             });
         }
 
