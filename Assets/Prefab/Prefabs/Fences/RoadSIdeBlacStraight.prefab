@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 404958}
   - component: {fileID: 3357902}
   - component: {fileID: 2306416}
+  - component: {fileID: -7874804748032822563}
   m_Layer: 0
   m_Name: RoadSIdeBlacStraight
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7874804748032822563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff10c45cb107b14facabd7932199bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 438604}
   - component: {fileID: 3330294}
   - component: {fileID: 2384872}
+  - component: {fileID: 2577347748628610950}
   m_Layer: 0
   m_Name: DrainGrill
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2577347748628610950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff10c45cb107b14facabd7932199bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
