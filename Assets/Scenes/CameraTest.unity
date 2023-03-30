@@ -16540,7 +16540,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814309995}
-  m_LocalRotation: {x: -8.012277e-18, y: -0.0040856954, z: -3.2735996e-20, w: 0.99999166}
+  m_LocalRotation: {x: 8.012279e-18, y: -0.0040856954, z: 3.2736006e-20, w: 0.99999166}
   m_LocalPosition: {x: -28.48, y: 4.12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38183,6 +38183,7 @@ GameObject:
   - component: {fileID: 1738528462}
   - component: {fileID: 1738528465}
   - component: {fileID: 1738528466}
+  - component: {fileID: 1738528467}
   m_Layer: 0
   m_Name: ~~Gameplay Camera~~
   m_TagString: MainCamera
@@ -38248,7 +38249,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738528461}
-  m_LocalRotation: {x: -8.012277e-18, y: -0.0040856954, z: -3.2735996e-20, w: 0.99999166}
+  m_LocalRotation: {x: 8.012279e-18, y: -0.0040856954, z: 3.2736006e-20, w: 0.99999166}
   m_LocalPosition: {x: -28.48, y: 4.12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38302,6 +38303,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1738528467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738528461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860e82cd7a6bb4a29a4b7add4ec78d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shutterAngle: 270
+  _sampleCount: 7
+  _frameBlending: 0.13
+  _reconstructionShader: {fileID: 4800000, guid: 60701d53f4c638048b5e49c197d08b77,
+    type: 3}
+  _frameBlendingShader: {fileID: 4800000, guid: 95caa7c3844725840aec8dad64ac258e,
+    type: 3}
 --- !u!1 &1740240213
 GameObject:
   m_ObjectHideFlags: 0
