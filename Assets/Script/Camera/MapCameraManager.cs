@@ -13,8 +13,8 @@ public class MapCameraManager : MonoBehaviour
     private static Camera upCamera;
     public static Camera LvlCamera => upCamera;
 
-    private static SwitchLevelDelegate nextLvlCam = null;
-    public static SwitchLevelDelegate NextLvlCam => nextLvlCam;
+    private static SetupCamDelegate nextLvlCam = null;
+    public static SetupCamDelegate NextLvlCam => nextLvlCam;
 
     private void Awake()
     {
@@ -45,9 +45,23 @@ public class MapCameraManager : MonoBehaviour
         }
     }
 
-    private void SwitchCam()
+    private void SwitchCam(DirectionState dir)
     {
         lvlCamera.position = lvlPointQueue.Dequeue().position;
-        lvlCamera.eulerAngles = new Vector3(90, 0, 0);
+        switch (dir)
+        {
+            case DirectionState.NORTH:
+                lvlCamera.eulerAngles = new Vector3(90, 0, 0);
+                break;
+            case DirectionState.SOUTH:
+                lvlCamera.eulerAngles = new Vector3(90, 0, 180);
+                break;
+            case DirectionState.EAST:
+                lvlCamera.eulerAngles = new Vector3(90, 0, 270);
+                break;
+            case DirectionState.WEST:
+                lvlCamera.eulerAngles = new Vector3(90, 0, 90);
+                break;
+        }
     }
 }

@@ -14,6 +14,7 @@ public class PlayerSprite : MonoBehaviour
     {
         GameObject playerBubble = Resources.Load<GameObject>("PlayerBubble");
         rectSprite = Instantiate(playerBubble, UIManager.instance.CanvasUI).GetComponent<RectTransform>();
+        rectSprite.SetAsFirstSibling();
         
         GameObject mapShadow = Resources.Load<GameObject>("ShadowMask");
         rectShadow = Instantiate(mapShadow, UIManager.instance.CanvasUI).GetComponent<RectTransform>();

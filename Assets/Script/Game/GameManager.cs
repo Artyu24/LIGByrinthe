@@ -17,8 +17,6 @@ public class GameManager : MonoBehaviour
     [Header("Delegate")]
     private static SwitchLevelDelegate resetAndSwitch = null;
     public static SwitchLevelDelegate ResetAndSwitch => resetAndSwitch;
-    private static SwitchLevelDelegate setupNextLevel = null;
-    public static SwitchLevelDelegate SetupNextLevel => setupNextLevel;
 
     private void Awake()
     {
@@ -30,12 +28,10 @@ public class GameManager : MonoBehaviour
             playerPointQueue.Enqueue(point);
         }
 
-        setupNextLevel = SetupPlayerAndCam;
     }
     private void Start()
     {
-        resetAndSwitch += MapCameraManager.NextLvlCam;
-        resetAndSwitch += SetupNextLevel;
+        resetAndSwitch += SetupPlayerAndCam;
 
         resetAndSwitch();
     }
@@ -46,6 +42,12 @@ public class GameManager : MonoBehaviour
         player.position = nextSetup.spawnPoint.position;
 
         CameraMovement.SetupCam(nextSetup.camDirection);
+        MapCameraManager.NextLvlCam(nextSetup.camDirection);
+
+        if (playerPointQueue.Count == 0)
+        {
+            resetAndSwitch = null;
+        }
     }
 
 

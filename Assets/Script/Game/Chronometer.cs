@@ -11,7 +11,7 @@ public class Chronometer : MonoBehaviour
     [SerializeField] Text textObject;
     [SerializeField] float chronoTime;
     [SerializeField] string chronoTimeString;
-    [SerializeField] bool isRunning;
+    [SerializeField] static bool isRunning;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class Chronometer : MonoBehaviour
         return MathF.Round(chronoTime, 2);
     }
 
-    public void StopChrono()
+    public static void StopChrono()
     {
         isRunning = false;
     }
