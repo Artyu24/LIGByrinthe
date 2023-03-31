@@ -18,7 +18,6 @@ public class TransitionEffect : MonoBehaviour
         rect.localPosition = new Vector3(2500, 0, 0);
         rect.DOLocalMoveX(0, effectTime).OnComplete(() =>
         {
-            Debug.Log("test");
             if (GameManager.ResetAndSwitch != null)
             {
                 GameManager.ResetAndSwitch();

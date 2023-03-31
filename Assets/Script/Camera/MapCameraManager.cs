@@ -48,20 +48,5 @@ public class MapCameraManager : MonoBehaviour
     private void SwitchCam(DirectionState dir)
     {
         lvlCamera.position = lvlPointQueue.Dequeue().position;
-        switch (dir)
-        {
-            case DirectionState.NORTH:
-                lvlCamera.eulerAngles = new Vector3(90, 0, 0);
-                break;
-            case DirectionState.SOUTH:
-                lvlCamera.eulerAngles = new Vector3(90, 0, 180);
-                break;
-            case DirectionState.EAST:
-                lvlCamera.eulerAngles = new Vector3(90, 0, 270);
-                break;
-            case DirectionState.WEST:
-                lvlCamera.eulerAngles = new Vector3(90, 0, 90);
-                break;
-        }
     }
 }
