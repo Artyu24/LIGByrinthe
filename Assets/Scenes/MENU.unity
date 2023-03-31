@@ -1215,6 +1215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialMenu: {fileID: 897946244}
+  timeScore: {fileID: 0}
 --- !u!1 &1729301774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,6 +1597,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Win
+      objectReference: {fileID: 0}
+    - target: {fileID: 611409680681940329, guid: d16dd480d162e894eb6cbf1550efa88e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 611409680681940330, guid: d16dd480d162e894eb6cbf1550efa88e,
         type: 3}

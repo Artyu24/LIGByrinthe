@@ -12,6 +12,8 @@ public class Button : MonoBehaviour
 
     [SerializeField] private Transform buttonPlate;
 
+    private bool isPushed = false;
+
     private void Awake()
     {
         interactionBubblePrefab = Resources.Load<GameObject>("InteractionPoint");
@@ -19,19 +21,28 @@ public class Button : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        door.ActionDoor();
+        if (!isPushed)
+        {
+            isPushed = true;
+            StartCoroutine(ResetButton());
 
-        if(bubbleTemp != null)
-            Destroy(bubbleTemp);
+            door.ActionDoor();
 
-        bubbleTemp = Instantiate(interactionBubblePrefab, UIManager.instance.CanvasUI);
-        bubbleTemp.GetComponent<InteractionBubble>().SetPos(door.transform.position);
+            if(bubbleTemp != null)
+                Destroy(bubbleTemp);
 
-        buttonPlate.DOMoveY(-0.12f, 0.3f);
+            bubbleTemp = Instantiate(interactionBubblePrefab, UIManager.instance.CanvasUI);
+            bubbleTemp.GetComponent<InteractionBubble>().SetPos(door.transform.position);
+
+            buttonPlate.DOMoveY(-0.12f, 0.3f);
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    private IEnumerator ResetButton()
     {
+        yield return new WaitForSeconds(0.5f);
+        isPushed = false;
         buttonPlate.DOMoveY(0.05f, 0.3f);
+
     }
 }

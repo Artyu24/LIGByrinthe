@@ -9,14 +9,17 @@ using UnityEngine.UI;
 public class UIMenu : MonoBehaviour
 {
     [SerializeField] private GameObject tutorialMenu;
-    [SerializeField] private static GameObject timeScore;
+    [SerializeField] private Text timeScore;
     private static CanvasGroup win;
+    private static Text winText;
 
     void Start()
     {
-        if(tutorialMenu != null) tutorialMenu.SetActive(false);
-        /*Get reference to "Time" in the prefab*/
+        if(tutorialMenu != null) 
+            tutorialMenu.SetActive(false);
+        
         win = GetComponent<CanvasGroup>();
+        winText = timeScore;
     }
 
     // Update is called once per frame
@@ -33,8 +36,9 @@ public class UIMenu : MonoBehaviour
     public static void ShowWinScreen()
     {
         win.alpha = 1;
-        Debug.Log("Showing WinScreen");
-        if (timeScore != null) timeScore = Chronometer.GetTime();
+        
+        if (winText != null)
+            winText.text = Chronometer.GetTime().ToString();
     }
 
     public void StartGame(int sceneIndex)

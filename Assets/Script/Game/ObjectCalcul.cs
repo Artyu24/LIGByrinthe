@@ -16,7 +16,7 @@ public class ObjectCalcul : MonoBehaviour
         Vector2 objectVec = new Vector2(transform.position.x - GameManager.instance.Player.position.x, transform.position.z - GameManager.instance.Player.position.z);
         float angle = Vector2.SignedAngle(playerVec, objectVec);
 
-        if (Mathf.Abs(angle) > 110)
+        if (Mathf.Abs(angle) > 110 && Vector2.Distance(playerVec, objectVec) > 2)
         {
             gameObject.layer = 6;
             
