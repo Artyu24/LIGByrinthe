@@ -7,6 +7,7 @@ public class TransitionEffect : MonoBehaviour
 {
     private static int effectTime = 2;
     private static RectTransform rect;
+    public static GameObject win;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class TransitionEffect : MonoBehaviour
         if (finish)
         {
             Chronometer.StopChrono();
+            UIMenu.ShowWinScreen();
         }
     }
 }

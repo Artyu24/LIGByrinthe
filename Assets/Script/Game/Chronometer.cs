@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class Chronometer : MonoBehaviour
 {
     [SerializeField] Text textObject;
-    [SerializeField] float chronoTime;
-    [SerializeField] string chronoTimeString;
+    public static float chronoTime;
+    static string chronoTimeString;
     [SerializeField] static bool isRunning;
 
     private void Awake()
@@ -32,7 +32,7 @@ public class Chronometer : MonoBehaviour
         
     }
 
-    public float GetTime()
+    public static float GetTime()
     {
         return MathF.Round(chronoTime, 2);
     }
@@ -40,6 +40,7 @@ public class Chronometer : MonoBehaviour
     public static void StopChrono()
     {
         isRunning = false;
+
     }
     public void ResumeChrono()
     {
