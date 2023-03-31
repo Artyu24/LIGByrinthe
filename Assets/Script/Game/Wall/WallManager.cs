@@ -41,7 +41,8 @@ public class WallManager : MonoBehaviour
 
     public void DesacWall(DirectionState state, Vector3 playerPos)
     {
-        setupObject();
+        if(setupObject != null)
+            setupObject();
 
         foreach (WallObject wall in allWalls)
         {

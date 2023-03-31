@@ -18,13 +18,22 @@ public class TransitionEffect : MonoBehaviour
         rect.localPosition = new Vector3(2500, 0, 0);
         rect.DOLocalMoveX(0, effectTime).OnComplete(() =>
         {
-            GameManager.ResetAndSwitch();
-            ExitEffect();
+            if (GameManager.ResetAndSwitch != null)
+            {
+                GameManager.ResetAndSwitch();
+                ExitEffect(false);
+            }
+            else
+                ExitEffect(true);
         });
     }
 
-    private static void ExitEffect()
+    private static void ExitEffect(bool finish)
     {
         rect.DOLocalMoveX(-2500, effectTime);
+        if (finish)
+        {
+            Chronometer.StopChrono();
+        }
     }
 }

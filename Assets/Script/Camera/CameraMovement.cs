@@ -55,7 +55,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K) && !isInMovement)
+        if (Input.GetKeyDown(KeyCode.Q) && !isInMovement)
         {
             //Debug.Log("Left");
             WallManager.instance.ResetWall();
@@ -70,7 +70,7 @@ public class CameraMovement : MonoBehaviour
             });
         }
 
-        if (Input.GetKeyDown(KeyCode.M) && !isInMovement)
+        if (Input.GetKeyDown(KeyCode.D) && !isInMovement)
         {
             //Debug.Log("Droite");
             WallManager.instance.ResetWall();

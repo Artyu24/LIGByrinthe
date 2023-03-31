@@ -7,6 +7,7 @@ public class ObjectCalcul : MonoBehaviour
     private void Start()
     {
         WallManager.instance.setupObject += CheckObject;
+        CheckObject();
     }
 
     private void CheckObject()
