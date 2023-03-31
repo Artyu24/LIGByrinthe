@@ -28,11 +28,10 @@ public class GameManager : MonoBehaviour
             playerPointQueue.Enqueue(point);
         }
 
+        resetAndSwitch += SetupPlayerAndCam;
     }
     private void Start()
     {
-        resetAndSwitch += SetupPlayerAndCam;
-
         resetAndSwitch();
     }
 
@@ -41,8 +40,8 @@ public class GameManager : MonoBehaviour
         NewLevelSetup nextSetup = playerPointQueue.Dequeue();
         player.position = nextSetup.spawnPoint.position;
 
-        CameraMovement.SetupCam(nextSetup.camDirection);
         MapCameraManager.NextLvlCam(nextSetup.camDirection);
+        CameraMovement.SetupCam(nextSetup.camDirection);
 
         if (playerPointQueue.Count == 0)
         {
