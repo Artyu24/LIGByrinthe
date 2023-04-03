@@ -60,7 +60,11 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CameraMovement.IsInMovement) rb.velocity = Vector3.zero;
+        if (CameraMovement.IsInMovement)
+        {
+            rb.velocity = Vector3.down * 10;
+            IsGrounded = true;
+        }
         else
         {
             if (CameraMovement.GetDirection() == DirectionState.NORTH)
